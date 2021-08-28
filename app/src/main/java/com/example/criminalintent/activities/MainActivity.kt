@@ -6,7 +6,6 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.criminalintent.R
 
 class MainActivity : AppCompatActivity(){
@@ -18,10 +17,9 @@ class MainActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        navController = findNavController(R.id.navController)
+        /*navController = findNavController(R.id.navController)
         appBarConfiguration = AppBarConfiguration(navController.graph, null)
-
-        setupActionBarWithNavController(navController = navController, configuration = appBarConfiguration)
+        setupActionBarWithNavController(navController = navController, configuration = appBarConfiguration)*/
 
     }
 

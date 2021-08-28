@@ -18,6 +18,10 @@ import com.example.criminalintent.adapters.crimeadapter.CrimeListAdapter
 import com.example.criminalintent.adapters.diffutils.CrimeListDiffUtils
 import com.example.criminalintent.models.Crime
 import com.example.criminalintent.viewmodels.CrimeListViewModel
+import com.google.android.material.appbar.MaterialToolbar
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
+import androidx.navigation.ui.AppBarConfiguration
 
 private const val TAG = "CrimeListFragment"
 
@@ -29,12 +33,13 @@ class CrimeListFragment : Fragment() {
 
     private var rootView: View? = null
     private lateinit var crimeRecyclerView: RecyclerView
+    private lateinit var toolbar: MaterialToolbar
     private val adapterRA: CrimeRecycleAdapter = CrimeRecycleAdapter()
     private val adapterLA: CrimeListAdapter = CrimeListAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        activity?.title = "Crime List"
+
     }
 
     override fun onCreateView(
@@ -44,6 +49,11 @@ class CrimeListFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_crime_list, container, false)
+        toolbar = rootView!!.findViewById(R.id.toolbar)
+        val navController = findNavController()
+        val appBarConfiguration = AppBarConfiguration(navController.graph)
+        toolbar.setupWithNavController(navController, appBarConfiguration)
+
         crimeRecyclerView = this.rootView?.findViewById(R.id.crime_recycler_view) as RecyclerView
         crimeRecyclerView.layoutManager = LinearLayoutManager(context)
         crimeRecyclerView.adapter = adapterRA

@@ -16,26 +16,14 @@
         <argument
             android:name="crimeId"
             app:argType="java.util.UUID" />
-        <action
-            android:id="@+id/action_crimeFragment_to_datePickerFragment"
-            app:destination="@id/datePickerFragment"
-            app:launchSingleTop="true" />
     </fragment>
     <fragment
         android:id="@+id/crimeListFragment"
         android:name="com.example.criminalintent.fragments.CrimeListFragment"
-        android:label="Crimes List"
+        android:label="@string/crime_list"
         tools:layout="@layout/fragment_crime_list">
         <action
             android:id="@+id/action_crimeListFragment_to_crimeFragment"
             app:destination="@id/crimeFragment" />
     </fragment>
-    <dialog
-        android:id="@+id/datePickerFragment"
-        android:name="com.example.criminalintent.fragments.datefragment.DatePickerFragment"
-        android:label="DatePickerFragment" >
-        <argument
-            android:name="date"
-            app:argType="java.util.Date" />
-    </dialog>
 </navigation>
