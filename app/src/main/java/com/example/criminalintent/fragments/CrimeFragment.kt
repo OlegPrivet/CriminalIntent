@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -21,7 +22,6 @@ import com.example.criminalintent.R
 import com.example.criminalintent.models.Crime
 import com.example.criminalintent.utils.Utils
 import com.example.criminalintent.viewmodels.CrimeDetailViewModel
-import com.google.android.material.appbar.MaterialToolbar
 import java.util.*
 
 class CrimeFragment : Fragment() {
@@ -31,7 +31,7 @@ class CrimeFragment : Fragment() {
     private lateinit var titleField: EditText
     private lateinit var dateButton: Button
     private lateinit var solvedCH: CheckBox
-    private lateinit var toolbar: MaterialToolbar
+    private lateinit var toolbar: Toolbar
 
     private var rootView: View? = null
     private val args by navArgs<CrimeFragmentArgs>()
@@ -53,6 +53,17 @@ class CrimeFragment : Fragment() {
     ): View? {
         rootView = inflater.inflate(R.layout.fragment_crime, container, false)
         toolbar = rootView!!.findViewById(R.id.toolbar)
+        toolbar.inflateMenu(R.menu.crime_top_menu)
+        toolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.delete_crime -> {
+                    crimeDetailViewModel.deleteCrime(crime)
+                    requireActivity().onBackPressed()
+                    true
+                }
+                else -> false
+            }
+        }
         val navController = findNavController()
         val appBarConfiguration = AppBarConfiguration(navController.graph)
         toolbar.setupWithNavController(navController, appBarConfiguration)
@@ -104,13 +115,13 @@ class CrimeFragment : Fragment() {
     private fun setDate(date: Date) {
         val c = Calendar.getInstance()
         c.time = date
-        val datePick = DatePickerDialog(
-            requireContext(), {pickerDate, year, month, day ->
-                val timePicker = TimePickerDialog(requireContext(),
+        DatePickerDialog(
+            requireContext(), { pickerDate, year, month, day ->
+                TimePickerDialog(
+                    requireContext(),
                     { pickerTime, hour, minute ->
                         crime.date = GregorianCalendar(year, month, day, hour, minute).time
                         crimeDetailViewModel.saveCrime(crime)
-
                     },
                     c.get(Calendar.HOUR),
                     c.get(Calendar.MINUTE),
@@ -133,7 +144,7 @@ class CrimeFragment : Fragment() {
 
     override fun onStop() {
         super.onStop()
-        crimeDetailViewModel.saveCrime(crime)
+        //crimeDetailViewModel.saveCrime(crime)
     }
 
 }

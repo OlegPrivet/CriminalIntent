@@ -28,4 +28,8 @@ class CrimeDetailViewModel() : ViewModel() {
         crimeRepository.addCrime(crime)
     }
 
+    fun deleteCrime(crime: Crime) = viewModelScope.launch {
+        crimeRepository.deleteCrime(crime)
+    }
+
 }

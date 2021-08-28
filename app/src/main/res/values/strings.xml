@@ -9,4 +9,8 @@
     <string name="new_crime">New Crime</string>
     <string name="new_crime_description">Adding new crime</string>
     <string name="crime_list">Crime List</string>
+    <string name="save_crime">Save Crime</string>
+    <string name="save_new_crime_description">Save new crime button</string>
+    <string name="delete_crime">Delete Crime</string>
+    <string name="delete_crime_description">Delete crime button</string>
 </resources>
