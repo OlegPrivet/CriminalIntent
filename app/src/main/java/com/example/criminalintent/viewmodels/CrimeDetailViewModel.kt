@@ -4,6 +4,7 @@ import androidx.lifecycle.*
 import com.example.criminalintent.models.Crime
 import com.example.criminalintent.repositories.CrimeRepository
 import kotlinx.coroutines.launch
+import java.io.File
 import java.util.*
 
 class CrimeDetailViewModel() : ViewModel() {
@@ -30,6 +31,10 @@ class CrimeDetailViewModel() : ViewModel() {
 
     fun deleteCrime(crime: Crime) = viewModelScope.launch {
         crimeRepository.deleteCrime(crime)
+    }
+
+    fun getPhotoFile(crime: Crime):File{
+        return crimeRepository.getPhotoFile(crime)
     }
 
 }
